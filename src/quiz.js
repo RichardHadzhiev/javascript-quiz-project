@@ -7,11 +7,9 @@ class Quiz {
         this.timeRemaining = timeRemaining;
         this.correctAnswers = 0;
         this.currentQuestionIndex = 0;
-        this.total = 0;
     }
     // 2. getQuestion()
     getQuestion(){
-        this.total++
         return this.questions[this.currentQuestionIndex]
     }
     // 3. moveToNextQuestion()
