@@ -44,6 +44,6 @@ class Quiz {
             }
         }
         this.questions = filterQuestions;
-    }
+    };
 
 }
