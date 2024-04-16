@@ -33,9 +33,12 @@ class Quiz {
             return true
         }
     }
+
+
     averageDifficulty() {
-        const totalDifficulty = this.questions.reduce((acc, question) => acc+question.difficulty,0)
+        const totalSumDifficulty = this.questions.reduce((acc, question) => acc+question.difficulty,0)
         
-        return totalDifficulty / this.questions.length;
+        return totalSumDifficulty / this.questions.length;
+
     }   
 }
