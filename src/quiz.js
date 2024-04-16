@@ -33,6 +33,7 @@ class Quiz {
             return true
         }
     }
+
     filterQuestionsByDifficulty(difficulty) {
         if (typeof difficulty !== ‘number’ || difficulty < 1 || difficulty > 3) {
             return;
@@ -45,4 +46,12 @@ class Quiz {
         }
         this.questions = filterQuestions;
     }
+    averageDifficulty() {
+        const totalSumDifficulty = this.questions.reduce((acc, question) => acc+question.difficulty,0)
+        
+        return totalSumDifficulty / this.questions.length;
+
+    }   
+
+
 }
