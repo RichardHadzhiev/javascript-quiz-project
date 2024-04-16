@@ -35,7 +35,7 @@ class Quiz {
     }
 
     filterQuestionsByDifficulty(difficulty) {
-        if (typeof difficulty !== ‘number’ || difficulty < 1 || difficulty > 3) {
+        if (typeof difficulty !== "number" || difficulty < 1 || difficulty > 3) {
             return;
         }
         let filterQuestions = [];
