@@ -33,5 +33,16 @@ class Quiz {
             return true
         }
     }
-
+    filterQuestionsByDifficulty(difficulty) {
+        if (typeof difficulty !== ‘number’ || difficulty < 1 || difficulty > 3) {
+            return;
+        }
+        let filterQuestions = [];
+        for (let i = 0; i < this.questions.length; i++) {
+            if (this.questions[i].difficulty === difficulty) {
+                filterQuestions.push(this.questions[i]);
+            }
+        }
+        this.questions = filterQuestions;
+    }
 }
