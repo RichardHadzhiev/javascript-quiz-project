@@ -127,8 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
     choiceContainer.appendChild(label)
 
     choiceContainer.appendChild(document.createElement("br"));
-
-    
   })
     
 
