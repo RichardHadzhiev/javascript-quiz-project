@@ -46,24 +46,48 @@ document.addEventListener("DOMContentLoaded", () => {
   /************  SHOW INITIAL CONTENT  ************/
 
   // Convert the time remaining in seconds to minutes and seconds, and pad the numbers with zeros if needed
-  const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
-  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+  // function updateTimer (){
+  // //const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+  // //const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
 
-  // Display the time remaining in the time remaining container
+  // // Display the time remaining in the time remaining container
+
+  const quizViewContainer = document.getElementById("quizView");
+  quizViewContainer.style.position = 'relative'
+
+  
   const timeRemainingContainer = document.getElementById("timeRemaining");
-  timeRemainingContainer.innerText = `${minutes}:${seconds}`;
-
+  timeRemainingContainer.style.position = 'absolute' ;
+  timeRemainingContainer.style.top = '8vh' ;
+  timeRemainingContainer.style.right = '8vw' ;
+  // //timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+  // }
+  
   // Show first question
   showQuestion();
 
 
   /************  TIMER  ************/
-
   let timer;
-
-
+function startTimer(){
+  timer = setInterval(()=>{
+    quiz.timeRemaining--;
+    //updateTimer();
+    const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+    timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+    if(quiz.timeRemaining <= 0){
+      clearInterval(timer);
+      showResults();
+    }
+  },1000);
+}
   /************  EVENT LISTENERS  ************/
-
+document.addEventListener("click",()=>{
+if(!timer){
+  startTimer();
+}
+})
   nextButton.addEventListener("click", nextButtonHandler);
 
 
@@ -74,7 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // nextButtonHandler() - Handles the click on the next button
   // showResults() - Displays the end view and the quiz results
 
-
+  
+function updateTimeDisplay(){
+  const timeRemainingContainer = document.getElementById("timeRemaining");
+  timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+}
 
   function showQuestion() {
     // If the quiz has ended, show the results
@@ -183,8 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function showResults() {
-
     // YOUR CODE HERE:
+    clearInterval(timer)
     //
     // 1. Hide the quiz view (div#quizView)
     quizView.style.display = "none";
@@ -195,13 +223,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Update the result container (div#result) inner text to show the number of correct answers out of total questions
     resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; 
   }
+
   function restartQuiz() {
     quiz.hasEnded();
     // Reset UI elements to their initial state
     quizView.style.display = "block";
     endView.style.display = "none";
     progressBar.style.width = "0%";
-
     quiz.timeLimit = quizDuration;
     showQuestion();
   }
