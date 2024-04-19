@@ -230,7 +230,6 @@ function updateTimeDisplay(){
     quizView.style.display = "block";
     endView.style.display = "none";
     progressBar.style.width = "0%";
-
     quiz.timeLimit = quizDuration;
     showQuestion();
   }
