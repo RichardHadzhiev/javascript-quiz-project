@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const questionContainer = document.querySelector("#question");
   const choiceContainer = document.querySelector("#choices");
   const nextButton = document.querySelector("#nextButton");
+  const restartButton = document.querySelector("#restartButton");
 
   // End view elements
   const resultContainer = document.querySelector("#result");
@@ -79,6 +80,7 @@ function startTimer(){
     if(quiz.timeRemaining <= 0){
       clearInterval(timer);
       showResults();
+      restartQuiz
     }
   },1000);
 }
@@ -90,6 +92,13 @@ if(!timer){
 })
   nextButton.addEventListener("click", nextButtonHandler);
 
+  console.log("Restart Button:", restartButton); // Check if restartButton is referencing the correct button element
+  if (restartButton) {
+    console.log("Restart Button exists!"); // Check if restartButton exists
+    restartButton.addEventListener("click", restartQuiz); // Add event listener to the restart button
+  } else {
+    console.log("Restart Button does not exist!");
+  }
 
 
   /************  FUNCTIONS  ************/
@@ -224,6 +233,8 @@ function updateTimeDisplay(){
     resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; 
   }
 
+
+
   function restartQuiz() {
     quiz.hasEnded();
     // Reset UI elements to their initial state
@@ -233,5 +244,4 @@ function updateTimeDisplay(){
     quiz.timeLimit = quizDuration;
     showQuestion();
   }
-
 });
